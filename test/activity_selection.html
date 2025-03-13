@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Activities Selection</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4a90e2, #1c3b70);
+            color: #333;
+        }
+        .total-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .container {
+            width: 90vw;
+            height: 90vh;
+            background: #f7f9fc;
+            padding: 80px 25px 25px; /* Added padding-top to avoid overlap */
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #1c3b70;
+            margin-bottom: 20px;
+        }
+        .activity {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .activity:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .activity img {
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .activity-details {
+            flex: 1;
+        }
+        .activity label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1c3b70;
+        }
+        .activity p {
+            font-size: 14px;
+            color: #555;
+        }
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e63946;
+        }
+        .quantity {
+            width: 50px;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: #1c3b70;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .submit-btn:hover {
+            background: #16305a;
+            transform: scale(1.05);
+        }
+        input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            accent-color: #1c3b70;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.activity').forEach(activity => {
+                const checkbox = activity.querySelector('input[type=checkbox]');
+                const quantity = activity.querySelector('input[type=number]');
+                if (checkbox.checked) {
+                    const price = parseFloat(checkbox.dataset.price);
+                    total += price * parseInt(quantity.value);
+                }
+            });
+            document.getElementById('total-price').innerText = 'Total Price: ₱' + total;
+        }
+    </script>
+</head>
+<body>
+    <div class="total-fixed" id="total-price">Total Price: ₱0.00</div>
+    <div class="container">
+        <h2>Select Your Water Activities</h2>
+        <form action="activity_selection.php" method="post">
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Kayaking" data-price="500" onchange="updateTotal()">
+                <img src="assets/kayak.jpg" alt="Kayaking">
+                <div class="activity-details">
+                    <label>Kayaking</label>
+                    <p>Paddle through serene waters and explore nature up close.</p>
+                    <span class="price">₱500</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Jet Ski" data-price="1500" onchange="updateTotal()">
+                <img src="assets/" alt="Jet Ski">
+                <div class="activity-details">
+                    <label>Jet Ski</label>
+                    <p>Experience the thrill of speed on the water with a jet ski ride.</p>
+                    <span class="price">₱1500</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Helmet Diving" data-price="3000" onchange="updateTotal()">
+                <img src="assets/helmet.jpg" alt="Helmet Diving">
+                <div class="activity-details">
+                    <label>Helmet Diving</label>
+                    <p>Explore the underwater world with professional diving gear.</p>
+                    <span class="price">₱3000</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Parasailing" data-price="2000" onchange="updateTotal()">
+                <img src="assets/parasailing.png" alt="Parasailing">
+                <div class="activity-details">
+                    <label>Parasailing</label>
+                    <p>Explore the underwater world with professional diving gear.</p>
+                    <span class="price">₱2000</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Clift Diving" data-price="2000" onchange="updateTotal()">
+                <img src="assets/cliff diving.jpg" alt="Clift Diving">
+                <div class="activity-details">
+                    <label>Clift diving</label>
+                    <p>Explore the underwater world with professional diving gear.</p>
+                    <span class="price">₱2000</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Banana Boat" data-price="300" onchange="updateTotal()">
+                <img src="assets/banana.jpg" alt="Banana boat">
+                <div class="activity-details">
+                    <label>Banana boat</label>
+                    <p>Explore the underwater world with professional diving gear.</p>
+                    <span class="price">₱300</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Zip line" data-price="2000" onchange="updateTotal()">
+                <img src="assets/zipline.jpg" alt="Zip line">
+                <div class="activity-details">
+                    <label>Zip line</label>
+                    <p>Explore the underwater world with professional diving gear.</p>
+                    <span class="price">₱2000</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <div class="activity">
+                <input type="checkbox" name="activities[]" value="Snorkeling" data-price="1000" onchange="updateTotal()">
+                <img src="assets/snorkling.jpg" alt="Snorkeling">
+                <div class="activity-details">
+                    <label>Snorkeling</label>
+                    <p>Explore the underwater world with professional diving gear.</p>
+                    <span class="price">₱1000</span>
+                    <input type="number" name="quantity[]" value="1" min="1" onchange="updateTotal()">
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Proceed</button>
+        </form>
+    </div>
+</body>
+</html>
