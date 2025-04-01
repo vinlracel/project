@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Activities and Destinations</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #fbc531, #e84118);
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background: #f7f9fc;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            text-align: center;
+            color: #e84118;
+        }
+        .selected-list {
+            list-style: none;
+            padding: 0;
+        }
+        .selected-list li {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectedItems = JSON.parse(localStorage.getItem("selectedItems")) || [];
+            const listContainer = document.getElementById("selectedList");
+            
+            if (selectedItems.length === 0) {
+                listContainer.innerHTML = "<p>No selections made.</p>";
+            } else {
+                selectedItems.forEach(item => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = item;
+                    listContainer.appendChild(listItem);
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Selected Activities and Destinations</h2>
+        <ul id="selectedList" class="selected-list"></ul>
+    </div>
+</body>
+</html>
